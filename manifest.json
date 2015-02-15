@@ -1,0 +1,26 @@
+{
+   "app": {
+      "background": {
+         "scripts": [ "/background.js" ]
+      }
+   },
+   "sandbox": {
+      "pages": ["/sandbox.html"]
+    },
+   "icons": {
+      "128":"images/icons/128icon.png"
+   },
+   
+   "manifest_version": 2,
+   "name": "모든신상",
+   "description":"인기 여성 쇼핑몰의 신상품(5~7%할인)만 모아서 보여주는 앱",
+
+   "permissions": [ "webview", "alwaysOnTopWindows","storage","unlimitedStorage",
+    "http://*/*", "https://*/*"  
+     ],
+   
+
+   "short_name": "모든신상",
+   
+   "version": "0.0.1"
+}

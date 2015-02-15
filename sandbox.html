@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <body>
+  	<script src="jquery.min.js"></script>
+    <script>
+
+        var response = ""
+	    var calbackHotTopic = function(result){
+			response = result.htResponse.result.list_innerHTML;
+		};
+
+
+		var messageHandler = function(event) {
+
+			var command = event.data.command;
+
+			if(command=='category'){
+
+				var scriptContent = event.data.result;
+
+				scriptContent = scriptContent.replace(/Element/gi,'').replace('(function()','try').replace('elRoot','elRoot2').replace('elGrp','elGrp2')
+					.replace('}) ()','}catch(e){ response = aKwds; 	}');
+				//console.log(scriptContent);
+				var cs = document.createElement('script');
+      
+			    cs.innerHTML = scriptContent;
+			    
+			    document.getElementsByTagName("body")[0].appendChild(cs);
+				
+
+				
+				event.source.postMessage({'time':command,'result':response}, event.origin);	
+
+			}else{
+				var r = event.data.result
+			
+			   	eval(r)	;
+			 
+			  	// Send a reply
+			  	event.source.postMessage({'time':command,'result':response}, event.origin);	
+			}
+
+			
+			
+		};
+
+		window.addEventListener('message', messageHandler);      
+      	
+      	var elRoot = {
+      		query : function(){}
+      	};
+      	var elGrp = {
+      		query : function(){}
+      	}
+      	var $Fn = function() {}     	
+    </script>
+    
+  </body>
+</html>
